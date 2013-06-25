@@ -4,7 +4,6 @@
 #   <<project>>
 #
 #-------------------------------------------------------------------------------
-# From http://wiki.wxpython.org/wxPython%20by%20Example
 
 import wxversion
 wxversion.select("2.8")
