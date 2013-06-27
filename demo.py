@@ -1,4 +1,3 @@
-# From http://wiki.wxpython.org/wxGTKWebKit
 import wxversion
 #wxversion.select("2.6")
 wxversion.select("2.8")
