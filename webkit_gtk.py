@@ -1,4 +1,3 @@
-# From http://wiki.wxpython.org/wxGTKWebKit
 import wx
 
 import gobject
@@ -32,10 +31,14 @@ the wx.Frame before use this WKHtmlWindow class.
 class WKHtmlWindow(wx.Panel):
     def __init__(self, *args, **kwargs):
         wx.Panel.__init__(self, *args, **kwargs)
+        self.Bind(wx.EVT_WINDOW_CREATE, self.OnCreate) 
 
+    def OnCreate(self):
         # Here is where we do the "magic" to embed webkit into wxGTK.
         whdl = self.GetHandle()
+        print whdl
         window = gtk.gdk.window_lookup(whdl)
+        print window
 
         # We must keep a reference of "pizza". Otherwise we get a crash.
         self.pizza = pizza = window.get_user_data()
@@ -52,16 +55,21 @@ class WKHtmlWindow(wx.Panel):
 
     # Some basic usefull methods
     def SetEditable(self, editable=True):
-        self.ctrl.set_editable(editable)
+        if hasattr(self, 'ctrl'):
+            self.ctrl.set_editable(editable)
 
     def LoadUrl(self, url):
-        self.ctrl.load_uri(url)
+        if hasattr(self, 'ctrl'):
+            self.ctrl.load_uri(url)
 
     def HistoryBack(self):
-        self.ctrl.go_back()
+        if hasattr(self, 'ctrl'):
+            self.ctrl.go_back()
 
     def HistoryForward(self):
-        self.ctrl.go_forward()
+        if hasattr(self, 'ctrl'):
+            self.ctrl.go_forward()
 
     def StopLoading(self):
-        self.ctrl.stop_loading()
+        if hasattr(self, 'ctrl'):
+            self.ctrl.stop_loading()
